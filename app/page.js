@@ -11,27 +11,6 @@ import Editor from "@monaco-editor/react"
 
 
 export default function Home() {
-	const [code, setCode] = useState('')
-	const [lines, setLines] = useState(['1'])
-	const textareaRef = useRef(null)
-	const lineNumbersRef = useRef(null)
-
-	useEffect(() => {
-		const lineCount = code.split('\n').length
-		setLines(Array.from({ length: lineCount }, (_, i) => (i + 1).toString()))
-	}, [code])
-
-	const handleCodeChange = (e) => {
-		setCode(e.target.value)
-	}
-
-	const syncScroll = (e) => {
-		if (textareaRef.current && lineNumbersRef.current) {
-			lineNumbersRef.current.scrollTop = textareaRef.current.scrollTop
-		}
-	}
-
-
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground">
 			<div className="flex h-full w-full flex-col">
