@@ -9,7 +9,6 @@ import { Code2 } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 
-
 export default function Home() {
 	const [code, setCode] = useState("");
 	return (
@@ -67,7 +66,7 @@ export default function Home() {
 					</div>
 					<div className="flex h-full flex-1 flex-col">
 						<div
-							className="flex items-center justify-between px-4 py-2">
+							className="flex items-center border-b border-muted justify-between px-4 py-2">
 							<div className="flex items-center gap-2">
 								<Button variant="ghost" size="icon">
 									<FileIcon className="h-5 w-5" />
@@ -97,6 +96,12 @@ export default function Home() {
 											tabSize={4}
 											onChange={(value) => setCode(value)}
 											value={code}
+											options={{
+												padding: { top: 10 },
+												minimap: { enabled: true, showRegionSectionHeaders: true },
+												stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
+											}}
+											language="javascript"
 										//theme="vs-dark"
 										></Editor>
 									</div>
@@ -164,7 +169,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }
 
