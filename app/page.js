@@ -93,6 +93,7 @@ export default function Home() {
 								<div className="flex-1 overflow-hidden">
 									<div className="h-full w-full">
 										<Editor className="h-full w-full"
+											tabSize={4}
 										//theme="vs-dark"
 										></Editor>
 									</div>
