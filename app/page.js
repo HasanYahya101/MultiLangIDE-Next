@@ -1,13 +1,13 @@
 "use client"
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
-import { Code2 } from 'lucide-react'
-import { useEffect, useRef, useState } from "react"
-import Editor from "@monaco-editor/react"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+import { Code2 } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import Editor from "@monaco-editor/react";
 
 
 export default function Home() {
