@@ -11,6 +11,7 @@ import Editor from "@monaco-editor/react";
 
 
 export default function Home() {
+	const [code, setCode] = useState("");
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground">
 			<div className="flex h-full w-full flex-col">
@@ -94,6 +95,8 @@ export default function Home() {
 									<div className="h-full w-full">
 										<Editor className="h-full w-full"
 											tabSize={4}
+											onChange={(value) => setCode(value)}
+											value={code}
 										//theme="vs-dark"
 										></Editor>
 									</div>
