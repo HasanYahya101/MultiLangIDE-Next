@@ -116,10 +116,10 @@ export default function Home() {
 											<div className="relative h-[calc(85vh-3.5px)]">
 												<div
 													ref={lineNumbersRef}
-													className="absolute left-0 top-0 bottom-0.5 w-12 bg-gray-900 overflow-hidden"
+													className="absolute left-0 top-0 bottom-0 py-2 w-12 bg-gray-900 overflow-hidden"
 												>
 													{lines.map((line, index) => (
-														<div key={index} className="px-2 mt-0.5 text-right text-gray-500 select-none font-mono text-sm">
+														<div key={index} className="px-2 text-right text-gray-500 select-none font-mono text-sm">
 															{line}
 														</div>
 													))}
