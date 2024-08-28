@@ -1,10 +1,36 @@
+"use client"
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
+import { Code2 } from 'lucide-react'
+import { useEffect, useRef, useState } from "react"
+
 
 export default function Home() {
+	const [code, setCode] = useState('')
+	const [lines, setLines] = useState(['1'])
+	const textareaRef = useRef(null)
+	const lineNumbersRef = useRef(null)
+
+	useEffect(() => {
+		const lineCount = code.split('\n').length
+		setLines(Array.from({ length: lineCount }, (_, i) => (i + 1).toString()))
+	}, [code])
+
+	const handleCodeChange = (e) => {
+		setCode(e.target.value)
+	}
+
+	const syncScroll = (e) => {
+		if (textareaRef.current && lineNumbersRef.current) {
+			lineNumbersRef.current.scrollTop = textareaRef.current.scrollTop
+		}
+	}
+
+
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground">
 			<div className="flex h-full w-full flex-col">
@@ -84,8 +110,32 @@ export default function Home() {
 						</div>
 						<div className="flex h-full w-full flex-1 overflow-auto">
 							<div className="flex h-full w-full flex-col">
-								<div className="flex-1 overflow-auto">
-									<div className="h-full w-full p-4" />
+								<div className="flex-1 overflow-hidden">
+									<div className="h-full w-full" >
+										<div className="w-full mx-auto bg-gray-800 shadow-xl overflow-hidden">
+											<div className="relative h-[calc(85vh-3.5px)]">
+												<div
+													ref={lineNumbersRef}
+													className="absolute left-0 top-0 bottom-0.5 w-12 bg-gray-900 overflow-hidden"
+												>
+													{lines.map((line, index) => (
+														<div key={index} className="px-2 mt-0.5 text-right text-gray-500 select-none font-mono text-sm">
+															{line}
+														</div>
+													))}
+												</div>
+												<textarea
+													ref={textareaRef}
+													value={code}
+													onChange={handleCodeChange}
+													onScroll={syncScroll}
+													className="w-full h-full pl-14 pr-4 py-2 bg-gray-800 text-gray-200 font-mono text-sm resize-none focus:outline-none"
+													style={{ lineHeight: '1.5', tabSize: 4 }}
+													spellCheck="false"
+												/>
+											</div>
+										</div>
+									</div>
 								</div>
 								<div
 									className="flex items-center justify-between border-t border-muted px-4 py-2">
