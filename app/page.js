@@ -7,6 +7,7 @@ import Link from "next/link"
 import { Separator } from "@/components/ui/separator"
 import { Code2 } from 'lucide-react'
 import { useEffect, useRef, useState } from "react"
+import Editor from "@monaco-editor/react"
 
 
 export default function Home() {
@@ -86,7 +87,7 @@ export default function Home() {
 					</div>
 					<div className="flex h-full flex-1 flex-col">
 						<div
-							className="flex items-center justify-between border-b border-muted px-4 py-2">
+							className="flex items-center justify-between px-4 py-2">
 							<div className="flex items-center gap-2">
 								<Button variant="ghost" size="icon">
 									<FileIcon className="h-5 w-5" />
@@ -111,30 +112,10 @@ export default function Home() {
 						<div className="flex h-full w-full flex-1 overflow-auto">
 							<div className="flex h-full w-full flex-col">
 								<div className="flex-1 overflow-hidden">
-									<div className="h-full w-full" >
-										<div className="w-full mx-auto bg-gray-800 shadow-xl overflow-hidden">
-											<div className="relative h-[calc(85vh-3.5px)]">
-												<div
-													ref={lineNumbersRef}
-													className="absolute left-0 top-0 bottom-0 py-2 w-12 bg-gray-900 overflow-hidden"
-												>
-													{lines.map((line, index) => (
-														<div key={index} className="px-2 text-right text-gray-500 select-none font-mono text-sm">
-															{line}
-														</div>
-													))}
-												</div>
-												<textarea
-													ref={textareaRef}
-													value={code}
-													onChange={handleCodeChange}
-													onScroll={syncScroll}
-													className="w-full h-full pl-14 pr-4 py-2 bg-gray-800 text-gray-200 font-mono text-sm resize-none focus:outline-none"
-													style={{ lineHeight: '1.5', tabSize: 4 }}
-													spellCheck="false"
-												/>
-											</div>
-										</div>
+									<div className="h-full w-full">
+										<Editor className="h-full w-full"
+										//theme="vs-dark"
+										></Editor>
 									</div>
 								</div>
 								<div
