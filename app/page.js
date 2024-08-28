@@ -8,25 +8,6 @@ export default function Home() {
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground">
 			<div className="flex h-full w-full flex-col">
-				<header
-					className="flex items-center justify-between border-b border-muted px-4 py-2">
-					<div className="flex items-center gap-2">
-						<Button variant="ghost" size="icon">
-							<MenuIcon className="h-5 w-5" />
-						</Button>
-						<Input
-							placeholder="Search files..."
-							className="max-w-xs rounded-md bg-muted px-3 py-1 text-sm" />
-					</div>
-					<div className="flex items-center gap-2">
-						<Button variant="ghost" size="icon">
-							<PowerIcon className="h-5 w-5" />
-						</Button>
-						<Button variant="ghost" size="icon">
-							<MaximizeIcon className="h-5 w-5" />
-						</Button>
-					</div>
-				</header>
 				<div className="flex h-full w-full">
 					<div className="flex h-full w-[300px] flex-col border-r border-muted">
 						<div
