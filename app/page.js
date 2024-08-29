@@ -11,8 +11,21 @@ import Editor from "@monaco-editor/react";
 
 export default function Home() {
 	const [code, setCode] = useState("");
+	const [currentLine, setCurrentLine] = useState(1);
+	const [totalLines, setTotalLines] = useState(0);
+
+	// defie print function
+	function print(toPrint) {
+		console.log(toPrint);
+	}
+
+	useEffect(() => {
+		print("Current", currentLine);
+		print("total", totalLines);
+	}), [];
+
 	return (
-		<div className="flex h-screen w-full bg-background text-foreground">
+		<div className="flex h-screen w-full bg-background text-foreground border border-muted">
 			<div className="flex h-full w-full flex-col">
 				<div className="flex h-full w-full">
 					<div className="flex h-full w-[300px] flex-col border-r border-muted">
@@ -100,8 +113,13 @@ export default function Home() {
 												padding: { top: 10 },
 												minimap: { enabled: true, showRegionSectionHeaders: true },
 												stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
+												formatOnPaste: true,
+												formatOnType: true,
+												insertSpaces: true,
+												tabSize: 4,
+												autoIndent: true,
 											}}
-											language="javascript"
+											language="python"
 										//theme="vs-dark"
 										></Editor>
 									</div>
