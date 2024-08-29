@@ -93,8 +93,8 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 		<div>
 			<div
 				className={cn(
-					"flex items-center py-1 px-2 rounded-md cursor-pointer hover:bg-accent",
-					!isFolder && "hover:text-accent-foreground rounded-md"
+					"flex items-center py-1 px-2 rounded-none cursor-pointer hover:bg-accent",
+					!isFolder && "hover:text-accent-foreground rounded-none"
 				)}
 				style={{ paddingLeft: `${level * 16}px` }}
 				onClick={handleSelect}
