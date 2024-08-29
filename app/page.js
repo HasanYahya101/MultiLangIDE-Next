@@ -306,7 +306,7 @@ export default function Home() {
 								<div
 									className="flex items-center justify-between border-t border-muted px-4 py-2">
 									<div className="flex items-center gap-2">
-										<div className="text-sm font-medium">1:1</div>
+										<div className="text-sm font-medium">{cursorPosition.lineNumber}:{cursorPosition.column}</div>
 										<Separator orientation="vertical" className="h-4" />
 										<div className="text-sm text-muted-foreground">Ln {cursorPosition.lineNumber}, Col {cursorPosition.column}</div>
 									</div>
