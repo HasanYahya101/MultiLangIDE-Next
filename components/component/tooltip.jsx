@@ -15,7 +15,7 @@ export function ButtonToolTip({ content, children }) {
                     {children}
                 </TooltipTrigger>
                 <TooltipContent className='py-1 px-2 rounded-lg'>
-                    <span className="text-sm select-none text-muted-foreground">{content}</span>
+                    <span className="text-[13px] select-none text-muted-foreground">{content}</span>
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>
