@@ -91,8 +91,8 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 		<div>
 			<div
 				className={cn(
-					"flex items-center py-1 px-2 cursor-pointer hover:bg-accent",
-					!isFolder && "hover:text-accent-foreground"
+					"flex items-center py-1 px-2 rounded-md cursor-pointer hover:bg-accent",
+					!isFolder && "hover:text-accent-foreground rounded-md"
 				)}
 				style={{ paddingLeft: `${level * 16}px` }}
 				onClick={handleSelect}
@@ -104,7 +104,9 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						animate={{ rotate: isOpen ? 90 : 0 }}
 						transition={{ duration: 0.2 }}
 					>
-						<ChevronRight size={16} />
+						<div onClick={handleToggle} className="flex-1 ml-0">
+							<ChevronRight size={16} />
+						</div>
 					</motion.span>
 				)}
 				{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2" />}
@@ -119,7 +121,8 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						className="h-6 py-1 px-2 w-32 mr-1 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
 					/>
 				) : (
-					<span>{data.name}</span>
+					<span onClick={handleToggle} className="flex-1"
+					>{data.name}</span>
 				)}
 				<Button
 					variant="ghost"
