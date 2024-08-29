@@ -266,15 +266,15 @@ export default function Home() {
 							</div>
 						</div>
 						<div className="flex-1 overflow-auto">
-							<div className="px-4 py-2">
-								<div className="gap-y-1 h-full w-full">
-									<ScrollArea className="w-full h-[89vh]">
+							<ScrollArea className="w-full h-[89vh]">
+								<div className="px-1.5 py-2">
+									<div className="gap-y-1 h-full w-full">
 										<div className="p-2">
 											<FileTreeNode data={fileStructure} level={0} onSelect={handleSelect} onUpdate={handleUpdate} />
 										</div>
-									</ScrollArea>
+									</div>
 								</div>
-							</div>
+							</ScrollArea>
 						</div>
 					</div>
 					<div className="flex h-full flex-1 flex-col">
