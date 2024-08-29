@@ -124,7 +124,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						className="h-6 py-1 px-2 w-32 mr-1 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
 					/>
 				) : (
-					<span onClick={handleToggle} className="flex-1"
+					<span onClick={handleToggle} className="flex-1 select-none text-sm"
 					>{data.name}</span>
 				)}
 				<FileButtonToolTip content="Rename">
