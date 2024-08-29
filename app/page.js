@@ -111,6 +111,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				{isRenaming ? (
 					<Input
 						ref={inputRef}
+						//onBlur={renameEnd}
 						type="text"
 						value={newItemName}
 						onChange={handleInputChange}
@@ -329,10 +330,10 @@ export default function Home() {
 										<div className="text-sm text-muted-foreground">Ln {cursorPosition.lineNumber}, Col {cursorPosition.column}</div>
 									</div>
 									<div className="flex items-center gap-2">
-										<Button variant="ghost" size="icon">
+										<Button variant="ghost" size="smallicon">
 											<ZapIcon className="h-5 w-5" />
 										</Button>
-										<Button variant="ghost" size="icon">
+										<Button variant="ghost" size="smallicon">
 											<ChevronDownIcon className="h-5 w-5" />
 										</Button>
 									</div>
