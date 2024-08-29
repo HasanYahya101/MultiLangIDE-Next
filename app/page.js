@@ -120,6 +120,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						value={newItemName}
 						onChange={handleInputChange}
 						onKeyDown={handleInputKeyDown}
+						onBlur={() => setIsRenaming(false)}
 						className="h-6 py-1 px-2 w-32 mr-1 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
 					/>
 				) : (
