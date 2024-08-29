@@ -17,6 +17,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ButtonToolTip } from "@/components/component/tooltip";
 
 const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -261,12 +262,16 @@ export default function Home() {
 							className="flex items-center justify-between border-b border-muted px-4 py-3">
 							<div className="text-lg ml-1 font-medium">Explorer</div>
 							<div className="flex items-center gap-1.5">
-								<Button variant="ghost" size="smallicon">
-									<FolderPlus className="h-5 w-5 translate-y-[2px]" />
-								</Button>
-								<Button variant="ghost" size="smallicon">
-									<FilePlus className="h-5 w-5" />
-								</Button>
+								<ButtonToolTip content="New Folder">
+									<Button variant="ghost" size="smallicon">
+										<FolderPlus className="h-5 w-5 translate-y-[2px]" />
+									</Button>
+								</ButtonToolTip>
+								<ButtonToolTip content="New File">
+									<Button variant="ghost" size="smallicon">
+										<FilePlus className="h-5 w-5" />
+									</Button>
+								</ButtonToolTip>
 							</div>
 						</div>
 						<div className="flex-1 overflow-auto"
@@ -315,7 +320,7 @@ export default function Home() {
 											onChange={(value) => setCode(value)}
 											value={code}
 											options={{
-												padding: { top: 16 },
+												padding: { top: 20 },
 												minimap: { enabled: true, showRegionSectionHeaders: true },
 												stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
 												formatOnPaste: true,

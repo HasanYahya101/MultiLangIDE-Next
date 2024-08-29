@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Tooltip,
     TooltipContent,
@@ -5,8 +7,17 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export function ButtonToolTip() {
+export function ButtonToolTip({ content, children }) {
     return (
-        <div></div>
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    {children}
+                </TooltipTrigger>
+                <TooltipContent>
+                    {content}
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     );
 }
