@@ -254,9 +254,9 @@ export default function Home() {
 				<div className="flex h-full w-full">
 					<div className="flex h-full w-[300px] flex-col border-r border-muted">
 						<div
-							className="flex items-center justify-between border-b border-muted px-4 py-2">
+							className="flex items-center justify-between border-b border-muted px-4 py-2 h-[50px]">
 							<div className="text-sm font-medium">Explorer</div>
-							<div className="flex items-center gap-1 translate-y-[2px]">
+							<div className="flex items-center gap-1">
 								<Button variant="ghost" size="smallicon">
 									<FolderPlus className="h-5 w-5 translate-y-[1px]" />
 								</Button>
@@ -279,7 +279,7 @@ export default function Home() {
 					</div>
 					<div className="flex h-full flex-1 flex-col">
 						<div
-							className="flex items-center border-b border-muted justify-between px-4 py-2">
+							className="flex items-center border-b border-muted justify-between px-4 py-2 h-[50px]">
 							<div className="flex items-center gap-2">
 								<Button variant="ghost" size="icon">
 									<FileIcon className="h-5 w-5" />
@@ -347,10 +347,10 @@ export default function Home() {
 					</div>
 					<div className="flex h-full w-[300px] flex-col border-l border-muted">
 						<div
-							className="flex items-center justify-between border-b border-muted px-4 py-2">
+							className="flex items-center justify-between border-b border-muted px-4 py-2 h-[50px]">
 							<div className="text-sm font-medium">Outline</div>
 							<div className="flex items-center gap-2">
-								<Button variant="ghost" size="icon">
+								<Button variant="ghost" size="smallicon">
 									<MaximizeIcon className="h-5 w-5" />
 								</Button>
 							</div>
