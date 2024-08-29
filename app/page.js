@@ -325,7 +325,7 @@ export default function Home() {
 											onChange={(value) => setCode(value)}
 											value={code}
 											options={{
-												padding: { top: 20 },
+												padding: { top: 14 },
 												minimap: { enabled: true, showRegionSectionHeaders: true },
 												stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
 												formatOnPaste: true,
@@ -333,7 +333,6 @@ export default function Home() {
 												insertSpaces: true,
 												tabSize: 4,
 												autoIndent: true,
-												fontSize: 17,
 											}}
 											language="javascript"
 										//theme="vs-dark"
