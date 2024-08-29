@@ -101,7 +101,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 			>
 				{isFolder && (
 					<motion.span
-						className="mr-1 ml-2"
+						className="mr-1 ml-6"
 						onClick={handleToggle}
 						animate={{ rotate: isOpen ? 90 : 0 }}
 						transition={{ duration: 0.2 }}
@@ -111,7 +111,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						</div>
 					</motion.span>
 				)}
-				{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2" />}
+				{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2 ml-[30px]" />}
 				{isRenaming ? (
 					<Input
 						ref={inputRef}
@@ -131,7 +131,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 					<Button
 						variant="noboundary"
 						size="icon"
-						className="ml-auto h-6 w-6"
+						className="ml-auto h-6 w-6 mr-5"
 						onClick={handleRename}
 					>
 						<Edit2 size={16} />
@@ -142,7 +142,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 					<DropdownMenu>
 						<FileButtonToolTip content="Add item">
 							<DropdownMenuTrigger asChild>
-								<Button variant="noboundary" size="icon" className="h-6 w-6 mr-1">
+								<Button variant="noboundary" size="icon" className="h-6 w-6 mr-5">
 									<Plus size={16} />
 									<span className="sr-only">Add item</span>
 								</Button>
@@ -284,9 +284,9 @@ export default function Home() {
 							style={{ scrollbarWidth: 'none' }}
 						>
 							<ScrollArea className="w-full h-[89vh]">
-								<div className="px-1.5 py-2">
+								<div className="px-0 py-2">
 									<div className="gap-y-1 h-full w-full">
-										<div className="p-2">
+										<div className="py-2">
 											<FileTreeNode data={fileStructure} level={0} onSelect={handleSelect} onUpdate={handleUpdate} />
 										</div>
 									</div>
