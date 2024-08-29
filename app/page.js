@@ -115,7 +115,6 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				{isRenaming ? (
 					<Input
 						ref={inputRef}
-						//onBlur={renameEnd}
 						type="text"
 						value={newItemName}
 						onChange={handleInputChange}
@@ -181,6 +180,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 								<Input
 									ref={inputRef}
 									type="text"
+									onBlur={() => setIsAdding(false)}
 									value={newItemName}
 									onChange={handleInputChange}
 									onKeyDown={handleInputKeyDown}
