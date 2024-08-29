@@ -333,6 +333,7 @@ export default function Home() {
 												insertSpaces: true,
 												tabSize: 4,
 												autoIndent: true,
+												glyphMargin: false,
 											}}
 											language="javascript"
 										//theme="vs-dark"
