@@ -186,6 +186,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 export default function Home() {
 	const [code, setCode] = useState("");
 	const [cursorPosition, setCursorPosition] = useState({ lineNumber: 1, column: 1 });
+	const [totalLines, setTotalLines] = useState(1);
 	const editorRef = useRef(null);
 	const modelRef = useRef(null);
 
@@ -197,6 +198,13 @@ export default function Home() {
 			if (modelRef.current) {
 				const position = editor.getPosition();
 				setCursorPosition(position);
+			}
+		});
+
+		editor.onDidChangeModelContent((event) => {
+			if (modelRef.current) {
+				const lines = modelRef.current.getLineCount();
+				setTotalLines(lines);
 			}
 		});
 	};
@@ -306,7 +314,7 @@ export default function Home() {
 								<div
 									className="flex items-center justify-between border-t border-muted px-4 py-2">
 									<div className="flex items-center gap-2">
-										<div className="text-sm font-medium">{cursorPosition.lineNumber}:{cursorPosition.column}</div>
+										<div className="text-sm font-medium">{cursorPosition.lineNumber}:{totalLines}</div>
 										<Separator orientation="vertical" className="h-4" />
 										<div className="text-sm text-muted-foreground">Ln {cursorPosition.lineNumber}, Col {cursorPosition.column}</div>
 									</div>
