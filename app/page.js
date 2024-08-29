@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2, FilePlus, FolderPlus, Play } from 'lucide-react'
+import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2, FilePlus, FolderPlus, Play, FileScan } from 'lucide-react'
 import { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
@@ -289,10 +289,7 @@ export default function Home() {
 									<Play className="h-5 w-5" />
 								</Button>
 								<Button variant="ghost" size="icon">
-									<BugIcon className="h-5 w-5" />
-								</Button>
-								<Button variant="ghost" size="icon">
-									<GitBranchIcon className="h-5 w-5" />
+									<FileScan className="h-5 w-5" />
 								</Button>
 								<Button variant="ghost" size="icon">
 									<ExpandIcon className="h-5 w-5" />
