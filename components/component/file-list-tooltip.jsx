@@ -7,7 +7,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export function ButtonToolTip({ content, children }) {
+export function FileButtonToolTip({ content, children }) {
     return (
         <TooltipProvider>
             <Tooltip>
@@ -15,7 +15,7 @@ export function ButtonToolTip({ content, children }) {
                     {children}
                 </TooltipTrigger>
                 <TooltipContent className='py-1 px-2 rounded-lg'>
-                    <span className="text-sm select-none text-muted-foreground">{content}</span>
+                    <span className="text-xs select-none text-muted-foreground">{content}</span>
                 </TooltipContent>
             </Tooltip>
         </TooltipProvider>

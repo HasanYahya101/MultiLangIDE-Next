@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ButtonToolTip } from "@/components/component/tooltip";
+import { FileButtonToolTip } from "@/components/component/file-list-tooltip";
 
 const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -125,23 +126,27 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 					<span onClick={handleToggle} className="flex-1"
 					>{data.name}</span>
 				)}
-				<Button
-					variant="ghost"
-					size="icon"
-					className="ml-auto h-6 w-6"
-					onClick={handleRename}
-				>
-					<Edit2 size={16} />
-					<span className="sr-only">Rename</span>
-				</Button>
+				<FileButtonToolTip content="Rename">
+					<Button
+						variant="ghost"
+						size="icon"
+						className="ml-auto h-6 w-6"
+						onClick={handleRename}
+					>
+						<Edit2 size={16} />
+						<span className="sr-only">Rename</span>
+					</Button>
+				</FileButtonToolTip>
 				{isFolder && (
 					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button variant="ghost" size="icon" className="h-6 w-6">
-								<Plus size={16} />
-								<span className="sr-only">Add item</span>
-							</Button>
-						</DropdownMenuTrigger>
+						<FileButtonToolTip content="Add item">
+							<DropdownMenuTrigger asChild>
+								<Button variant="ghost" size="icon" className="h-6 w-6">
+									<Plus size={16} />
+									<span className="sr-only">Add item</span>
+								</Button>
+							</DropdownMenuTrigger>
+						</FileButtonToolTip>
 						<DropdownMenuContent>
 							<DropdownMenuItem onSelect={() => handleAddItem('file')}>Add File</DropdownMenuItem>
 							<DropdownMenuItem onSelect={() => handleAddItem('folder')}>Add Folder</DropdownMenuItem>
