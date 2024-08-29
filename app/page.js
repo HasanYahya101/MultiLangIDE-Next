@@ -3,9 +3,10 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight, ChevronDown, Folder, File, Plus } from 'lucide-react'
+import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2 } from 'lucide-react'
 import { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
@@ -209,6 +210,43 @@ export default function Home() {
 		});
 	};
 
+	const [selectedNode, setSelectedNode] = useState(null)
+	const [fileStructure, setFileStructure] = useState({
+		id: 'root',
+		name: 'root',
+		type: 'folder',
+		children: [
+			{
+				id: 'src',
+				name: 'src',
+				type: 'folder',
+				children: [
+					{ id: 'src/index.js', name: 'index.js', type: 'file' },
+					{ id: 'src/styles.css', name: 'styles.css', type: 'file' },
+				],
+			},
+			{
+				id: 'public',
+				name: 'public',
+				type: 'folder',
+				children: [
+					{ id: 'public/index.html', name: 'index.html', type: 'file' },
+					{ id: 'public/favicon.ico', name: 'favicon.ico', type: 'file' },
+				],
+			},
+			{ id: 'package.json', name: 'package.json', type: 'file' },
+			{ id: 'README.md', name: 'README.md', type: 'file' },
+		],
+	})
+
+	const handleSelect = (node) => {
+		setSelectedNode(node)
+	}
+
+	const handleUpdate = (updatedData) => {
+		setFileStructure(updatedData)
+	}
+
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground border border-muted">
 			<div className="flex h-full w-full flex-col">
@@ -229,35 +267,10 @@ export default function Home() {
 						<div className="flex-1 overflow-auto">
 							<div className="px-4 py-2">
 								<div className="mb-2 text-xs font-medium text-muted-foreground">root</div>
-								<div className="grid gap-1">
-									<Link
-										href="#"
-										className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted"
-										prefetch={false}>
-										<FileIcon className="h-4 w-4" />
-										<div className="truncate text-sm">App.tsx</div>
-									</Link>
-									<Link
-										href="#"
-										className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted"
-										prefetch={false}>
-										<FileIcon className="h-4 w-4" />
-										<div className="truncate text-sm">index.tsx</div>
-									</Link>
-									<Link
-										href="#"
-										className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted"
-										prefetch={false}>
-										<FolderIcon className="h-4 w-4" />
-										<div className="truncate text-sm">components</div>
-									</Link>
-									<Link
-										href="#"
-										className="flex items-center gap-2 rounded-md px-2 py-1 hover:bg-muted"
-										prefetch={false}>
-										<FolderIcon className="h-4 w-4" />
-										<div className="truncate text-sm">utils</div>
-									</Link>
+								<div className="gap-y-1 h-full w-full">
+									<div className="p-2">
+										<FileTreeNode data={fileStructure} level={0} onSelect={handleSelect} onUpdate={handleUpdate} />
+									</div>
 								</div>
 							</div>
 						</div>
