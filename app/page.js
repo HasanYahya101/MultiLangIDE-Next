@@ -11,18 +11,21 @@ import Editor from "@monaco-editor/react";
 
 export default function Home() {
 	const [code, setCode] = useState("");
-	const [currentLine, setCurrentLine] = useState(1);
-	const [totalLines, setTotalLines] = useState(0);
+	const [cursorPosition, setCursorPosition] = useState({ lineNumber: 1, column: 1 });
+	const editorRef = useRef(null);
+	const modelRef = useRef(null);
 
-	// defie print function
-	function print(toPrint) {
-		console.log(toPrint);
-	}
+	const handleEditorDidMount = (editor) => {
+		editorRef.current = editor;
+		modelRef.current = editor.getModel();
 
-	useEffect(() => {
-		print("Current", currentLine);
-		print("total", totalLines);
-	}), [];
+		editor.onDidChangeCursorPosition((event) => {
+			if (modelRef.current) {
+				const position = editor.getPosition();
+				setCursorPosition(position);
+			}
+		});
+	};
 
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground border border-muted">
@@ -105,7 +108,9 @@ export default function Home() {
 							<div className="flex h-full w-full flex-col">
 								<div className="flex-1 overflow-hidden">
 									<div className="h-full w-full">
-										<Editor className="h-full w-full"
+										<Editor className="h-full w-full" onMount={handleEditorDidMount}
+											defaultLanguage="javascript"
+											defaultValue=""
 											tabSize={4}
 											onChange={(value) => setCode(value)}
 											value={code}
@@ -119,7 +124,7 @@ export default function Home() {
 												tabSize: 4,
 												autoIndent: true,
 											}}
-											language="python"
+											language="javascript"
 										//theme="vs-dark"
 										></Editor>
 									</div>
@@ -129,7 +134,7 @@ export default function Home() {
 									<div className="flex items-center gap-2">
 										<div className="text-sm font-medium">1:1</div>
 										<Separator orientation="vertical" className="h-4" />
-										<div className="text-sm text-muted-foreground">Ln 1, Col 1</div>
+										<div className="text-sm text-muted-foreground">Ln {cursorPosition.lineNumber}, Col {cursorPosition.column}</div>
 									</div>
 									<div className="flex items-center gap-2">
 										<Button variant="ghost" size="icon">
