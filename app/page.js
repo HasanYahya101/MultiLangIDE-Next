@@ -111,7 +111,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						</div>
 					</motion.span>
 				)}
-				{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2 ml-[30px]" />}
+				{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2 ml-[1.85rem]" />}
 				{isRenaming ? (
 					<Input
 						ref={inputRef}
