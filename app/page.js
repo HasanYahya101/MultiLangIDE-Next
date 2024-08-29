@@ -279,7 +279,7 @@ export default function Home() {
 					</div>
 					<div className="flex h-full flex-1 flex-col">
 						<div
-							className="flex items-center border-b border-muted justify-between px-4 py-2">
+							className="flex items-center border-b border-muted justify-between px-4 py-3">
 							<div className="flex items-center gap-2">
 								<FileIcon className="h-5 w-5" />
 								<div className="text-sm font-medium">App.tsx</div>
@@ -288,10 +288,10 @@ export default function Home() {
 								<Button variant="ghost" size="smallicon">
 									<Play className="h-5 w-5" />
 								</Button>
-								<Button variant="ghost" size="icon">
+								<Button variant="ghost" size="smallicon">
 									<FileScan className="h-5 w-5" />
 								</Button>
-								<Button variant="ghost" size="icon">
+								<Button variant="ghost" size="smallicon">
 									<ExpandIcon className="h-5 w-5" />
 								</Button>
 							</div>
@@ -342,7 +342,7 @@ export default function Home() {
 					</div>
 					<div className="flex h-full w-[300px] flex-col border-l border-muted">
 						<div
-							className="flex items-center justify-between border-b border-muted px-4 py-2">
+							className="flex items-center justify-between border-b border-muted px-4 py-[18px]">
 							<div className="text-sm font-medium">Outline</div>
 						</div>
 						<div className="flex-1 overflow-auto">
