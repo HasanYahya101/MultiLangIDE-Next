@@ -259,7 +259,7 @@ export default function Home() {
 					<div className="flex h-full w-[300px] flex-col border-r border-muted">
 						<div
 							className="flex items-center justify-between border-b border-muted px-4 py-3">
-							<div className="text-sm font-medium">Explorer</div>
+							<div className="text-lg ml-1 font-medium">Explorer</div>
 							<div className="flex items-center gap-1.5">
 								<Button variant="ghost" size="smallicon">
 									<FolderPlus className="h-5 w-5 translate-y-[2px]" />
@@ -269,7 +269,9 @@ export default function Home() {
 								</Button>
 							</div>
 						</div>
-						<div className="flex-1 overflow-auto">
+						<div className="flex-1 overflow-auto"
+							style={{ scrollbarWidth: 'none' }}
+						>
 							<ScrollArea className="w-full h-[89vh]">
 								<div className="px-1.5 py-2">
 									<div className="gap-y-1 h-full w-full">
@@ -300,9 +302,11 @@ export default function Home() {
 								</Button>
 							</div>
 						</div>
-						<div className="flex h-full w-full flex-1 overflow-auto">
+						<div className="flex h-full w-full flex-1 overflow-auto"
+							style={{ scrollbarWidth: 'none' }}
+						>
 							<div className="flex h-full w-full flex-col">
-								<div className="flex-1 overflow-hidden">
+								<div className="flex-1 overflow-hidden" style={{ scrollbarWidth: 'none' }}>
 									<div className="h-full w-full">
 										<Editor className="h-full w-full" onMount={handleEditorDidMount}
 											defaultLanguage="javascript"
@@ -311,7 +315,7 @@ export default function Home() {
 											onChange={(value) => setCode(value)}
 											value={code}
 											options={{
-												padding: { top: 10 },
+												padding: { top: 16 },
 												minimap: { enabled: true, showRegionSectionHeaders: true },
 												stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
 												formatOnPaste: true,
@@ -319,6 +323,7 @@ export default function Home() {
 												insertSpaces: true,
 												tabSize: 4,
 												autoIndent: true,
+												fontSize: 17,
 											}}
 											language="javascript"
 										//theme="vs-dark"
@@ -349,7 +354,9 @@ export default function Home() {
 							className="flex items-center justify-between border-b border-muted px-4 py-[18px]">
 							<div className="text-sm font-medium">Outline</div>
 						</div>
-						<div className="flex-1 overflow-auto">
+						<div className="flex-1 overflow-auto"
+							style={{ scrollbarWidth: 'none' }}
+						>
 							<div className="px-4 py-2">
 								<div className="mb-2 text-xs font-medium text-muted-foreground">App.tsx</div>
 								<div className="grid gap-1">
