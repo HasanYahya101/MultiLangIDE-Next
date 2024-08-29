@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2 } from 'lucide-react'
+import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2, FilePlus, FolderPlus } from 'lucide-react'
 import { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
@@ -256,12 +256,12 @@ export default function Home() {
 						<div
 							className="flex items-center justify-between border-b border-muted px-4 py-2">
 							<div className="text-sm font-medium">Explorer</div>
-							<div className="flex items-center gap-2">
-								<Button variant="ghost" size="icon">
-									<FolderIcon className="h-5 w-5" />
+							<div className="flex items-center gap-1 translate-y-[2px]">
+								<Button variant="ghost" size="smallicon">
+									<FolderPlus className="h-5 w-5 translate-y-[1px]" />
 								</Button>
-								<Button variant="ghost" size="icon">
-									<PlusIcon className="h-5 w-5" />
+								<Button variant="ghost" size="smallicon">
+									<FilePlus className="h-5 w-5" />
 								</Button>
 							</div>
 						</div>
