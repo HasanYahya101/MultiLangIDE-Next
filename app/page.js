@@ -93,7 +93,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 		<div>
 			<div
 				className={cn(
-					"flex items-center py-1 px-2 rounded-none cursor-pointer hover:bg-accent",
+					"flex items-center py-1 px-0 rounded-none cursor-pointer hover:bg-accent",
 					!isFolder && "hover:text-accent-foreground rounded-none"
 				)}
 				style={{ paddingLeft: `${level * 16}px` }}
@@ -101,7 +101,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 			>
 				{isFolder && (
 					<motion.span
-						className="mr-1"
+						className="mr-1 ml-2"
 						onClick={handleToggle}
 						animate={{ rotate: isOpen ? 90 : 0 }}
 						transition={{ duration: 0.2 }}
@@ -142,7 +142,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 					<DropdownMenu>
 						<FileButtonToolTip content="Add item">
 							<DropdownMenuTrigger asChild>
-								<Button variant="noboundary" size="icon" className="h-6 w-6">
+								<Button variant="noboundary" size="icon" className="h-6 w-6 mr-1">
 									<Plus size={16} />
 									<span className="sr-only">Add item</span>
 								</Button>
