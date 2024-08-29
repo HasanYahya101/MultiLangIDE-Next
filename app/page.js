@@ -130,7 +130,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 					<Button
 						variant="noboundary"
 						size="icon"
-						className="ml-auto h-6 w-6 mr-5"
+						className={`ml-auto h-6 w-6 ${!isFolder ? 'mr-5' : 'mr-2'} `}
 						onClick={handleRename}
 					>
 						<Edit2 size={16} />
