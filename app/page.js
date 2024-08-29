@@ -16,6 +16,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -266,11 +267,12 @@ export default function Home() {
 						</div>
 						<div className="flex-1 overflow-auto">
 							<div className="px-4 py-2">
-								<div className="mb-2 text-xs font-medium text-muted-foreground">root</div>
 								<div className="gap-y-1 h-full w-full">
-									<div className="p-2">
-										<FileTreeNode data={fileStructure} level={0} onSelect={handleSelect} onUpdate={handleUpdate} />
-									</div>
+									<ScrollArea>
+										<div className="p-2">
+											<FileTreeNode data={fileStructure} level={0} onSelect={handleSelect} onUpdate={handleUpdate} />
+										</div>
+									</ScrollArea>
 								</div>
 							</div>
 						</div>
