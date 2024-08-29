@@ -128,7 +128,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				)}
 				<FileButtonToolTip content="Rename">
 					<Button
-						variant="ghost"
+						variant="noboundary"
 						size="icon"
 						className="ml-auto h-6 w-6"
 						onClick={handleRename}
@@ -141,7 +141,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 					<DropdownMenu>
 						<FileButtonToolTip content="Add item">
 							<DropdownMenuTrigger asChild>
-								<Button variant="ghost" size="icon" className="h-6 w-6">
+								<Button variant="noboundary" size="icon" className="h-6 w-6">
 									<Plus size={16} />
 									<span className="sr-only">Add item</span>
 								</Button>
