@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2, FilePlus, FolderPlus } from 'lucide-react'
+import { ChevronRight, ChevronDown, Folder, File, Plus, Edit2, FilePlus, FolderPlus, Play } from 'lucide-react'
 import { useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 import { cn } from "@/lib/utils";
@@ -254,11 +254,11 @@ export default function Home() {
 				<div className="flex h-full w-full">
 					<div className="flex h-full w-[300px] flex-col border-r border-muted">
 						<div
-							className="flex items-center justify-between border-b border-muted px-4 py-2 h-[50px]">
+							className="flex items-center justify-between border-b border-muted px-4 py-3">
 							<div className="text-sm font-medium">Explorer</div>
-							<div className="flex items-center gap-1">
+							<div className="flex items-center gap-1.5">
 								<Button variant="ghost" size="smallicon">
-									<FolderPlus className="h-5 w-5 translate-y-[1px]" />
+									<FolderPlus className="h-5 w-5 translate-y-[2px]" />
 								</Button>
 								<Button variant="ghost" size="smallicon">
 									<FilePlus className="h-5 w-5" />
@@ -279,16 +279,14 @@ export default function Home() {
 					</div>
 					<div className="flex h-full flex-1 flex-col">
 						<div
-							className="flex items-center border-b border-muted justify-between px-4 py-2 h-[50px]">
+							className="flex items-center border-b border-muted justify-between px-4 py-2">
 							<div className="flex items-center gap-2">
-								<Button variant="ghost" size="icon">
-									<FileIcon className="h-5 w-5" />
-								</Button>
+								<FileIcon className="h-5 w-5" />
 								<div className="text-sm font-medium">App.tsx</div>
 							</div>
 							<div className="flex items-center gap-2">
-								<Button variant="ghost" size="icon">
-									<TerminalIcon className="h-5 w-5" />
+								<Button variant="ghost" size="smallicon">
+									<Play className="h-5 w-5" />
 								</Button>
 								<Button variant="ghost" size="icon">
 									<BugIcon className="h-5 w-5" />
@@ -347,13 +345,8 @@ export default function Home() {
 					</div>
 					<div className="flex h-full w-[300px] flex-col border-l border-muted">
 						<div
-							className="flex items-center justify-between border-b border-muted px-4 py-2 h-[50px]">
+							className="flex items-center justify-between border-b border-muted px-4 py-2">
 							<div className="text-sm font-medium">Outline</div>
-							<div className="flex items-center gap-2">
-								<Button variant="ghost" size="smallicon">
-									<MaximizeIcon className="h-5 w-5" />
-								</Button>
-							</div>
 						</div>
 						<div className="flex-1 overflow-auto">
 							<div className="px-4 py-2">
