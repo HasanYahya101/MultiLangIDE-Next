@@ -19,6 +19,12 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ButtonToolTip } from "@/components/component/tooltip";
 import { FileButtonToolTip } from "@/components/component/file-list-tooltip";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -89,6 +95,20 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 		}
 	}
 
+	const [tooltipVisible, setTooltipVisible] = useState(false);
+
+	const handleMouseEnter = () => {
+		setTooltipVisible(true);
+	};
+
+	const handleMouseLeave = () => {
+		setTooltipVisible(false);
+	};
+
+	const handleClick = () => {
+		setTooltipVisible(false);
+	};
+
 	return (
 		<div>
 			<div
@@ -139,14 +159,26 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				</FileButtonToolTip>
 				{isFolder && (
 					<DropdownMenu>
-						<FileButtonToolTip content="Add item">
-							<DropdownMenuTrigger asChild>
-								<Button variant="noboundary" size="icon" className="h-6 w-6 mr-5">
-									<Plus size={16} />
-									<span className="sr-only">Add item</span>
-								</Button>
-							</DropdownMenuTrigger>
-						</FileButtonToolTip>
+						<TooltipProvider>
+							<Tooltip visible={tooltipVisible} className="absolute"
+							>
+								<DropdownMenuTrigger>
+									<TooltipTrigger>
+										<Button variant="noboundary" size="icon" className="h-6 w-6 mr-5"
+											onClick={handleClick}
+											onMouseEnter={handleMouseEnter}
+											onMouseLeave={handleMouseLeave}
+										>
+											<Plus size={16} />
+											<span className="sr-only">Add item</span>
+										</Button>
+									</TooltipTrigger>
+								</DropdownMenuTrigger>
+								<TooltipContent className='py-1 px-2 rounded-lg'>
+									<span className="text-xs select-none text-muted-foreground">Add item</span>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 						<DropdownMenuContent>
 							<DropdownMenuItem onSelect={() => handleAddItem('file')}>Add File</DropdownMenuItem>
 							<DropdownMenuItem onSelect={() => handleAddItem('folder')}>Add Folder</DropdownMenuItem>
