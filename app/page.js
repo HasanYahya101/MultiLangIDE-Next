@@ -223,17 +223,6 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 							<ContextMenuSeparator />
 						</>
 					)}
-					<ContextMenuItem insetMonaco className="text-[13px]"
-						style={{ lineHeight: '1.0rem' }}
-					>
-						Copy Contents
-					</ContextMenuItem>
-					<ContextMenuItem insetMonaco className="text-[13px]"
-						style={{ lineHeight: '1.0rem' }}
-					>
-						Copy Name
-					</ContextMenuItem>
-					<ContextMenuSeparator />
 					<ContextMenuItem insetMonaco onClick={handleRename}
 						className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
@@ -317,15 +306,51 @@ export default function Home() {
 	};
 
 	const cut = () => {
-		editorRef.current.trigger('cut', 'editor.action.clipboardCutAction', []);
+		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
+		const event = new KeyboardEvent('keydown', {
+			key: 'x',
+			code: 'KeyX',
+			keyCode: 88, // Key code for 'x'
+			bubbles: true,
+			cancelable: true,
+			ctrlKey: !isMac,
+			metaKey: isMac
+		});
+
+		document.dispatchEvent(event);
 	};
 
 	const copy = () => {
-		editorRef.current.trigger('copy', 'editor.action.clipboardCopyAction', []);
+		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
+		const event = new KeyboardEvent('keydown', {
+			key: 'c',
+			code: 'KeyC',
+			keyCode: 67, // Key code for 'c'
+			bubbles: true,
+			cancelable: true,
+			ctrlKey: !isMac,
+			metaKey: isMac
+		});
+
+		document.dispatchEvent(event);
 	};
 
 	const paste = () => {
-		editorRef.current.trigger('paste', 'editor.action.clipboardPasteAction', []);
+		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
+		const event = new KeyboardEvent('keydown', {
+			key: 'v',
+			code: 'KeyV',
+			keyCode: 86, // Key code for 'v'
+			bubbles: true,
+			cancelable: true,
+			ctrlKey: !isMac,
+			metaKey: isMac
+		});
+
+		document.dispatchEvent(event);
 	};
 
 	const [selectedNode, setSelectedNode] = useState(null)
@@ -355,15 +380,15 @@ export default function Home() {
 			{ id: 'package.json', name: 'package.json', type: 'file' },
 			{ id: 'README.md', name: 'README.md', type: 'file' },
 		],
-	})
+	});
 
 	const handleSelect = (node) => {
 		setSelectedNode(node)
-	}
+	};
 
 	const handleUpdate = (updatedData) => {
 		setFileStructure(updatedData)
-	}
+	};
 
 	return (
 		<div className="flex h-screen w-full bg-background text-foreground border border-muted">
@@ -434,6 +459,10 @@ export default function Home() {
 													onChange={(value) => setCode(value)}
 													value={code}
 													options={{
+														smoothScrolling: true,
+														wordWrap: "on",
+														selectOnLineNumbers: true,
+														formatOnType: true,
 														contextmenu: false,
 														padding: { top: 14 },
 														minimap: { enabled: true, showRegionSectionHeaders: true },
