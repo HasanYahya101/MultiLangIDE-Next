@@ -207,12 +207,12 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				<ContextMenuContent className="min-w-56 w-56">
 					{isFolder && (
 						<>
-							<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+							<ContextMenuItem inset className="text-[13px]"
 								style={{ lineHeight: '1.0rem' }}
 							>
 								New File
 							</ContextMenuItem>
-							<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+							<ContextMenuItem inset className="text-[13px]"
 								style={{ lineHeight: '1.0rem' }}
 							>
 								New Folder
@@ -220,24 +220,24 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 							<ContextMenuSeparator />
 						</>
 					)}
-					<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+					<ContextMenuItem inset className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Copy Contents
 					</ContextMenuItem>
-					<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+					<ContextMenuItem inset className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Copy Name
 					</ContextMenuItem>
 					<ContextMenuSeparator />
 					<ContextMenuItem inset onClick={handleRename}
-						className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+						className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Rename
 					</ContextMenuItem>
-					<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+					<ContextMenuItem inset className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Delete
@@ -254,6 +254,11 @@ export default function Home() {
 	const [totalLines, setTotalLines] = useState(1);
 	const editorRef = useRef(null);
 	const modelRef = useRef(null);
+	const [isMac, setIsMac] = useState(false);
+
+	useEffect(() => {
+		setIsMac(window.navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+	}, []);
 
 	const handleEditorDidMount = (editor) => {
 		editorRef.current = editor;
@@ -371,26 +376,41 @@ export default function Home() {
 							<div className="flex h-full w-full flex-col">
 								<div className="flex-1 overflow-hidden" style={{ scrollbarWidth: 'none' }}>
 									<div className="h-full w-full">
-										<Editor className="h-full w-full" onMount={handleEditorDidMount}
-											defaultLanguage="javascript"
-											defaultValue=""
-											tabSize={4}
-											onChange={(value) => setCode(value)}
-											value={code}
-											options={{
-												padding: { top: 14 },
-												minimap: { enabled: true, showRegionSectionHeaders: true },
-												stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
-												formatOnPaste: true,
-												formatOnType: true,
-												insertSpaces: true,
-												tabSize: 4,
-												autoIndent: true,
-												glyphMargin: false,
-											}}
-											language="javascript"
-										//theme="vs-dark"
-										></Editor>
+										<ContextMenu>
+											<ContextMenuTrigger>
+												<Editor className="h-full w-full" onMount={handleEditorDidMount}
+													defaultLanguage="javascript"
+													defaultValue=""
+													tabSize={4}
+													onChange={(value) => setCode(value)}
+													value={code}
+													options={{
+														contextmenu: false,
+														padding: { top: 14 },
+														minimap: { enabled: true, showRegionSectionHeaders: true },
+														stickyScroll: { enabled: true, defaultModel: "foldingProviderModel" },
+														formatOnPaste: true,
+														formatOnType: true,
+														insertSpaces: true,
+														tabSize: 4,
+														autoIndent: true,
+														glyphMargin: false,
+													}}
+													language="javascript"
+												//theme="vs-dark"
+												></Editor>
+											</ContextMenuTrigger>
+											<ContextMenuContent className="min-w-64 w-64">
+												<ContextMenuItem inset className="text-[13px]"
+													style={{ lineHeight: '1.0rem' }}
+												>
+													Go to Definition
+													<ContextMenuShortcut>
+														{!isMac ? "Ctrl+F12" : "⌘F12"}
+													</ContextMenuShortcut>
+												</ContextMenuItem>
+											</ContextMenuContent>
+										</ContextMenu>
 									</div>
 								</div>
 								<div
