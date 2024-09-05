@@ -420,6 +420,7 @@ export default function Home() {
 													defaultLanguage="javascript"
 													defaultValue=""
 													tabSize={4}
+													ref={editorRef}
 													onChange={(value) => setCode(value)}
 													value={code}
 													options={{
