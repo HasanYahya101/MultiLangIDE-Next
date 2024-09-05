@@ -79,6 +79,12 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 		setNewItemName(e.target.value)
 	}
 
+	const deleteItem = (e) => {
+		e.stopPropagation()
+		const updatedChildren = data.children?.filter(child => child.id !== data.id)
+		onUpdate({ ...data, children: updatedChildren })
+	}
+
 	const handleInputKeyDown = (e) => {
 		if (e.key === 'Enter' && newItemName) {
 			if (isAdding && newItemType) {
@@ -160,9 +166,6 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 								<span className="sr-only">Rename</span>
 							</Button>
 						</FileButtonToolTip>
-						{isFolder && (
-							null
-						)}
 					</div>
 
 					<AnimatePresence initial={false}>
@@ -186,7 +189,7 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 									/>
 								))}
 								{isAdding && (
-									<div className="flex items-center py-1 px-2" style={{ paddingLeft: `${(level + 1) * 16}px` }}>
+									<div className="flex items-center py-1 px-2 mx-1" style={{ paddingLeft: `${(level + 1) * 16}px` }}>
 										{newItemType === 'folder' ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2" />}
 										<Input
 											ref={inputRef}
@@ -204,15 +207,15 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						)}
 					</AnimatePresence>
 				</ContextMenuTrigger>
-				<ContextMenuContent className="min-w-56 w-56">
+				<ContextMenuContent className="min-w-[10rem] w-[10rem]">
 					{isFolder && (
 						<>
-							<ContextMenuItem inset className="text-[13px]"
+							<ContextMenuItem insetMonaco className="text-[13px]" onClick={() => handleAddItem('file')}
 								style={{ lineHeight: '1.0rem' }}
 							>
 								New File
 							</ContextMenuItem>
-							<ContextMenuItem inset className="text-[13px]"
+							<ContextMenuItem insetMonaco className="text-[13px]" onClick={() => handleAddItem('folder')}
 								style={{ lineHeight: '1.0rem' }}
 							>
 								New Folder
@@ -220,24 +223,24 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 							<ContextMenuSeparator />
 						</>
 					)}
-					<ContextMenuItem inset className="text-[13px]"
+					<ContextMenuItem insetMonaco className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Copy Contents
 					</ContextMenuItem>
-					<ContextMenuItem inset className="text-[13px]"
+					<ContextMenuItem insetMonaco className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Copy Name
 					</ContextMenuItem>
 					<ContextMenuSeparator />
-					<ContextMenuItem inset onClick={handleRename}
+					<ContextMenuItem insetMonaco onClick={handleRename}
 						className="text-[13px]"
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Rename
 					</ContextMenuItem>
-					<ContextMenuItem inset className="text-[13px]"
+					<ContextMenuItem insetMonaco className="text-[13px]" onClick={deleteItem}
 						style={{ lineHeight: '1.0rem' }}
 					>
 						Delete
