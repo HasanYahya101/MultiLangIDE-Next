@@ -25,6 +25,21 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+	ContextMenu,
+	ContextMenuCheckboxItem,
+	ContextMenuContent,
+	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuRadioGroup,
+	ContextMenuRadioItem,
+	ContextMenuSeparator,
+	ContextMenuShortcut,
+	ContextMenuSub,
+	ContextMenuSubContent,
+	ContextMenuSubTrigger,
+	ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -95,135 +110,115 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 		}
 	}
 
-	const [tooltipVisible, setTooltipVisible] = useState(false);
-
-	const handleMouseEnter = () => {
-		setTooltipVisible(true);
-	};
-
-	const handleMouseLeave = () => {
-		setTooltipVisible(false);
-	};
-
-	const handleClick = () => {
-		setTooltipVisible(false);
-	};
-
 	return (
 		<div>
-			<div
-				className={cn(
-					"flex items-center py-1 px-0 rounded-none cursor-pointer hover:bg-accent",
-					!isFolder && "hover:text-accent-foreground rounded-none"
-				)}
-				style={{ paddingLeft: `${level * 16}px` }}
-				onClick={handleSelect}
-			>
-				{isFolder && (
-					<motion.span
-						className="mr-1 ml-6"
-						onClick={handleToggle}
-						animate={{ rotate: isOpen ? 90 : 0 }}
-						transition={{ duration: 0.2 }}
-					>
-						<div onClick={handleToggle} className="flex-1 ml-0">
-							<ChevronRight size={16} />
-						</div>
-					</motion.span>
-				)}
-				{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2 ml-[1.85rem]" />}
-				{isRenaming ? (
-					<Input
-						ref={inputRef}
-						type="text"
-						value={newItemName}
-						onChange={handleInputChange}
-						onKeyDown={handleInputKeyDown}
-						onBlur={() => setIsRenaming(false)}
-						className="h-6 py-1 px-2 w-32 mr-1 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
-					/>
-				) : (
-					<span onClick={handleToggle} className="flex-1 select-none text-sm"
-					>{data.name}</span>
-				)}
-				<FileButtonToolTip content="Rename">
-					<Button
-						variant="noboundary"
-						size="icon"
-						className={`ml-auto h-6 w-6 ${!isFolder ? 'mr-5' : 'mr-2'} `}
-						onClick={handleRename}
-					>
-						<Edit2 size={16} />
-						<span className="sr-only">Rename</span>
-					</Button>
-				</FileButtonToolTip>
-				{isFolder && (
-					<DropdownMenu>
-						<TooltipProvider>
-							<Tooltip visible={tooltipVisible} className="absolute"
-							>
-								<DropdownMenuTrigger>
-									<TooltipTrigger>
-										<Button variant="noboundary" size="icon" className="h-6 w-6 mr-5"
-											onClick={handleClick}
-											onMouseEnter={handleMouseEnter}
-											onMouseLeave={handleMouseLeave}
-										>
-											<Plus size={16} />
-											<span className="sr-only">Add item</span>
-										</Button>
-									</TooltipTrigger>
-								</DropdownMenuTrigger>
-								<TooltipContent className='py-1 px-2 rounded-lg'>
-									<span className="text-xs select-none text-muted-foreground">Add item</span>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
-						<DropdownMenuContent>
-							<DropdownMenuItem onSelect={() => handleAddItem('file')}>Add File</DropdownMenuItem>
-							<DropdownMenuItem onSelect={() => handleAddItem('folder')}>Add Folder</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				)}
-			</div>
-			<AnimatePresence initial={false}>
-				{isFolder && isOpen && (
-					<motion.div
-						initial={{ opacity: 0, height: 0 }}
-						animate={{ opacity: 1, height: 'auto' }}
-						exit={{ opacity: 0, height: 0 }}
-						transition={{ duration: 0.2 }}
-					>
-						{data.children?.map((child) => (
-							<FileTreeNode
-								key={child.id}
-								data={child}
-								level={level + 1}
-								onSelect={onSelect}
-								onUpdate={(updatedChild) => {
-									const updatedChildren = data.children?.map(c => c.id === updatedChild.id ? updatedChild : c)
-									onUpdate({ ...data, children: updatedChildren })
-								}}
-							/>
-						))}
-						{isAdding && (
-							<div className="flex items-center py-1 px-2" style={{ paddingLeft: `${(level + 1) * 16}px` }}>
-								{newItemType === 'folder' ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2" />}
-								<Input
-									ref={inputRef}
-									type="text"
-									onBlur={() => setIsAdding(false)}
-									value={newItemName}
-									onChange={handleInputChange}
-									onKeyDown={handleInputKeyDown}
-									className="h-6 py-1 px-2 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
-									placeholder={`New ${newItemType}`}
-								/>
-							</div>
+			<ContextMenu>
+				<ContextMenuTrigger>
+					<div
+						className={cn(
+							"flex items-center py-1 px-0 rounded-none cursor-pointer hover:bg-accent",
+							!isFolder && "hover:text-accent-foreground rounded-none"
 						)}
-					</motion.div>
-				)}
-			</AnimatePresence>
+						style={{ paddingLeft: `${level * 16}px` }}
+						onClick={handleSelect}
+					>
+						{isFolder && (
+							<motion.span
+								className="mr-1 ml-6"
+								onClick={handleToggle}
+								animate={{ rotate: isOpen ? 90 : 0 }}
+								transition={{ duration: 0.2 }}
+							>
+								<div onClick={handleToggle} className="flex-1 ml-0">
+									<ChevronRight size={16} />
+								</div>
+							</motion.span>
+						)}
+						{isFolder ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2 ml-[1.85rem]" />}
+						{isRenaming ? (
+							<Input
+								ref={inputRef}
+								type="text"
+								value={newItemName}
+								onChange={handleInputChange}
+								onKeyDown={handleInputKeyDown}
+								onBlur={() => setIsRenaming(false)}
+								className="h-6 py-1 px-2 w-32 mr-1 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
+							/>
+						) : (
+							<span onClick={handleToggle} className="flex-1 select-none text-sm"
+							>{data.name}</span>
+						)}
+						<FileButtonToolTip content="Rename">
+							<Button
+								variant="noboundary"
+								size="icon"
+								className={`ml-auto h-6 w-6 mr-5`}
+								onClick={handleRename}
+							>
+								<Edit2 size={16} />
+								<span className="sr-only">Rename</span>
+							</Button>
+						</FileButtonToolTip>
+						{isFolder && (
+							null
+						)}
+					</div>
+
+					<AnimatePresence initial={false}>
+						{isFolder && isOpen && (
+							<motion.div
+								initial={{ opacity: 0, height: 0 }}
+								animate={{ opacity: 1, height: 'auto' }}
+								exit={{ opacity: 0, height: 0 }}
+								transition={{ duration: 0.2 }}
+							>
+								{data.children?.map((child) => (
+									<FileTreeNode
+										key={child.id}
+										data={child}
+										level={level + 1}
+										onSelect={onSelect}
+										onUpdate={(updatedChild) => {
+											const updatedChildren = data.children?.map(c => c.id === updatedChild.id ? updatedChild : c)
+											onUpdate({ ...data, children: updatedChildren })
+										}}
+									/>
+								))}
+								{isAdding && (
+									<div className="flex items-center py-1 px-2" style={{ paddingLeft: `${(level + 1) * 16}px` }}>
+										{newItemType === 'folder' ? <Folder size={16} className="mr-2" /> : <File size={16} className="mr-2" />}
+										<Input
+											ref={inputRef}
+											type="text"
+											onBlur={() => setIsAdding(false)}
+											value={newItemName}
+											onChange={handleInputChange}
+											onKeyDown={handleInputKeyDown}
+											className="h-6 py-1 px-2 focus-visible:ring-1 focus-visible:ring-offset-0 focus-visible:ring-gray-400"
+											placeholder={`New ${newItemType}`}
+										/>
+									</div>
+								)}
+							</motion.div>
+						)}
+					</AnimatePresence>
+				</ContextMenuTrigger>
+				<ContextMenuContent className="w-20">
+					{isFolder && (
+						<ContextMenuItem>
+							New File
+						</ContextMenuItem>
+					)}
+					<ContextMenuItem>
+						New Folder
+					</ContextMenuItem>
+					<ContextMenuSeparator />
+					<ContextMenuItem>
+						Rename
+					</ContextMenuItem>
+				</ContextMenuContent>
+			</ContextMenu>
 		</div>
 	)
 }
