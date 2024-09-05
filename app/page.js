@@ -206,14 +206,16 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				</ContextMenuTrigger>
 				<ContextMenuContent className="w-20">
 					{isFolder && (
-						<ContextMenuItem>
-							New File
-						</ContextMenuItem>
+						<>
+							<ContextMenuItem>
+								New File
+							</ContextMenuItem>
+							<ContextMenuItem>
+								New Folder
+							</ContextMenuItem>
+							<ContextMenuSeparator />
+						</>
 					)}
-					<ContextMenuItem>
-						New Folder
-					</ContextMenuItem>
-					<ContextMenuSeparator />
 					<ContextMenuItem>
 						Rename
 					</ContextMenuItem>
