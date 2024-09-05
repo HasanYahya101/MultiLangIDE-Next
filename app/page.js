@@ -422,9 +422,6 @@ export default function Home() {
 													tabSize={4}
 													onChange={(value) => setCode(value)}
 													value={code}
-													minimap={{
-														position: 2,
-													}}
 													options={{
 														smoothScrolling: true,
 														wordWrap: "on",
