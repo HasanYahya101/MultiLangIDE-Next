@@ -264,6 +264,16 @@ export default function Home() {
 		editorRef.current = editor;
 		modelRef.current = editor.getModel();
 
+		editor.addAction({
+			id: 'editor.action.quickCommand',
+			label: 'Command Palette',
+			precondition: null,
+			keybindings: [],
+			run: () => {
+				return null;
+			}
+		});
+
 		editor.onDidChangeCursorPosition((event) => {
 			if (modelRef.current) {
 				const position = editor.getPosition();
@@ -277,6 +287,42 @@ export default function Home() {
 				setTotalLines(lines);
 			}
 		});
+	};
+
+	const goToDefinition = () => {
+		editorRef.current.trigger('goToDefinition', 'editor.action.goToDeclaration', []);
+	};
+
+	const gotoRefrences = () => {
+		editorRef.current.trigger('gotoRefrences', 'editor.action.referenceSearch.trigger', []);
+	};
+
+	const peekDefinition = () => {
+		editorRef.current.trigger('peekDefinition', 'editor.action.previewDeclaration', []);
+	};
+
+	const peekRefrences = () => {
+		editorRef.current.trigger('peekRefrences', 'editor.action.referenceSearch.trigger', []);
+	};
+
+	const renameSymbol = () => {
+		editorRef.current.trigger('renameSymbol', 'editor.action.rename', []);
+	};
+
+	const formatDocument = () => {
+		editorRef.current.trigger('formatDocument', 'editor.action.formatDocument', []);
+	};
+
+	const cut = () => {
+		editorRef.current.trigger('cut', 'editor.action.clipboardCutAction', []);
+	};
+
+	const copy = () => {
+		editorRef.current.trigger('copy', 'editor.action.clipboardCopyAction', []);
+	};
+
+	const paste = () => {
+		editorRef.current.trigger('paste', 'editor.action.clipboardPasteAction', []);
 	};
 
 	const [selectedNode, setSelectedNode] = useState(null)
@@ -400,15 +446,78 @@ export default function Home() {
 												//theme="vs-dark"
 												></Editor>
 											</ContextMenuTrigger>
-											<ContextMenuContent className="min-w-64 w-64">
-												<ContextMenuItem inset className="text-[13px]"
+											<ContextMenuContent className="min-w-[18rem] w-[18rem]">
+												<ContextMenuItem insetMonaco className="text-[13px]" onClick={goToDefinition}
 													style={{ lineHeight: '1.0rem' }}
 												>
 													Go to Definition
-													<ContextMenuShortcut>
+													<ContextMenuShortcut className="mr-2">
 														{!isMac ? "Ctrl+F12" : "⌘F12"}
 													</ContextMenuShortcut>
 												</ContextMenuItem>
+												<ContextMenuItem insetMonaco className="text-[13px]" onClick={gotoRefrences}
+													style={{ lineHeight: '1.0rem' }}
+												>
+													Go to Refrences
+													<ContextMenuShortcut className="mr-2">
+														{!isMac ? "Shift+F12" : "⇧F12"}
+													</ContextMenuShortcut>
+												</ContextMenuItem>
+												<ContextMenuSub insetMonaco className="text-[13px]"
+													style={{ lineHeight: '1.0rem' }}
+												>
+													<ContextMenuSubTrigger insetMonaco className="text-[13px]"
+														style={{ lineHeight: '1.0rem' }}
+													>Peek</ContextMenuSubTrigger>
+													<ContextMenuSubContent className="min-w-64 w-64">
+														<ContextMenuItem insetMonaco className="text-[13px]" onClick={peekDefinition}
+															style={{ lineHeight: '1.0rem' }}
+														>
+															Peek Definition
+															<ContextMenuShortcut className="mr-2">
+																{!isMac ? "Ctrl+Shift+O" : "⇧⌘F12"}
+															</ContextMenuShortcut>
+														</ContextMenuItem>
+														<ContextMenuItem insetMonaco className="text-[13px]" onClick={peekRefrences}
+															style={{ lineHeight: '1.0rem' }}
+														>
+															Peek Refrences
+														</ContextMenuItem>
+													</ContextMenuSubContent>
+													<ContextMenuSeparator />
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={renameSymbol}
+														style={{ lineHeight: '1.0rem' }}
+													>
+														Rename Symbol
+														<ContextMenuShortcut className="mr-2">
+															{!isMac ? "F2" : "F2"}
+														</ContextMenuShortcut>
+													</ContextMenuItem>
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={formatDocument}
+														style={{ lineHeight: '1.0rem' }}
+													>
+														Format Document
+														<ContextMenuShortcut className="mr-2">
+															{!isMac ? "Shift+Alt+F" : "⇧⌥F"}
+														</ContextMenuShortcut>
+													</ContextMenuItem>
+													<ContextMenuSeparator />
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={cut}
+														style={{ lineHeight: '1.0rem' }}
+													>
+														Cut
+													</ContextMenuItem>
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={copy}
+														style={{ lineHeight: '1.0rem' }}
+													>
+														Copy
+													</ContextMenuItem>
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={paste}
+														style={{ lineHeight: '1.0rem' }}
+													>
+														Paste
+													</ContextMenuItem>
+												</ContextMenuSub>
 											</ContextMenuContent>
 										</ContextMenu>
 									</div>
