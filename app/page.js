@@ -207,27 +207,38 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 				<ContextMenuContent className="min-w-56 w-56">
 					{isFolder && (
 						<>
-							<ContextMenuItem inset>
+							<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+								style={{ lineHeight: '1.0rem' }}
+							>
 								New File
 							</ContextMenuItem>
-							<ContextMenuItem inset>
+							<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+								style={{ lineHeight: '1.0rem' }}
+							>
 								New Folder
 							</ContextMenuItem>
 							<ContextMenuSeparator />
 						</>
 					)}
-					<ContextMenuItem inset>
+					<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+						style={{ lineHeight: '1.0rem' }}
+					>
 						Copy Contents
 					</ContextMenuItem>
-					<ContextMenuItem inset>
+					<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+						style={{ lineHeight: '1.0rem' }}
+					>
 						Copy Name
 					</ContextMenuItem>
 					<ContextMenuSeparator />
 					<ContextMenuItem inset onClick={handleRename}
+						className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+						style={{ lineHeight: '1.0rem' }}
 					>
 						Rename
 					</ContextMenuItem>
-					<ContextMenuItem inset
+					<ContextMenuItem inset className="text-[13px] text-[#a8a8a8] hover:text-white hover:bg-[#0060c0]"
+						style={{ lineHeight: '1.0rem' }}
 					>
 						Delete
 					</ContextMenuItem>
