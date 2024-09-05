@@ -466,7 +466,7 @@ export default function Home() {
 												<ContextMenuSub insetMonaco className="text-[13px]"
 													style={{ lineHeight: '1.0rem' }}
 												>
-													<ContextMenuSubTrigger insetMonaco className="text-[13px]"
+													<ContextMenuSubTrigger insetMonaco className="text-[13px] cursor-pointer"
 														style={{ lineHeight: '1.0rem' }}
 													>Peek</ContextMenuSubTrigger>
 													<ContextMenuSubContent className="min-w-64 w-64">
