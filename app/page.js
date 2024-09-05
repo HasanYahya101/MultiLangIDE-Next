@@ -204,20 +204,32 @@ const FileTreeNode = ({ data, level, onSelect, onUpdate }) => {
 						)}
 					</AnimatePresence>
 				</ContextMenuTrigger>
-				<ContextMenuContent className="w-20">
+				<ContextMenuContent className="min-w-56 w-56">
 					{isFolder && (
 						<>
-							<ContextMenuItem>
+							<ContextMenuItem inset>
 								New File
 							</ContextMenuItem>
-							<ContextMenuItem>
+							<ContextMenuItem inset>
 								New Folder
 							</ContextMenuItem>
 							<ContextMenuSeparator />
 						</>
 					)}
-					<ContextMenuItem>
+					<ContextMenuItem inset>
+						Copy Contents
+					</ContextMenuItem>
+					<ContextMenuItem inset>
+						Copy Name
+					</ContextMenuItem>
+					<ContextMenuSeparator />
+					<ContextMenuItem inset onClick={handleRename}
+					>
 						Rename
+					</ContextMenuItem>
+					<ContextMenuItem inset
+					>
+						Delete
 					</ContextMenuItem>
 				</ContextMenuContent>
 			</ContextMenu>
