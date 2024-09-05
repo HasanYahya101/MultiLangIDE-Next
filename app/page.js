@@ -306,51 +306,15 @@ export default function Home() {
 	};
 
 	const cut = () => {
-		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-
-		const event = new KeyboardEvent('keydown', {
-			key: 'x',
-			code: 'KeyX',
-			keyCode: 88, // Key code for 'x'
-			bubbles: true,
-			cancelable: true,
-			ctrlKey: !isMac,
-			metaKey: isMac
-		});
-
-		document.dispatchEvent(event);
+		editorRef.current.trigger('cut', 'editor.action.clipboardCutAction', []);
 	};
 
 	const copy = () => {
-		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-
-		const event = new KeyboardEvent('keydown', {
-			key: 'c',
-			code: 'KeyC',
-			keyCode: 67, // Key code for 'c'
-			bubbles: true,
-			cancelable: true,
-			ctrlKey: !isMac,
-			metaKey: isMac
-		});
-
-		document.dispatchEvent(event);
+		editorRef.current.trigger('copy', 'editor.action.clipboardCopyAction', []);
 	};
 
 	const paste = () => {
-		const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-
-		const event = new KeyboardEvent('keydown', {
-			key: 'v',
-			code: 'KeyV',
-			keyCode: 86, // Key code for 'v'
-			bubbles: true,
-			cancelable: true,
-			ctrlKey: !isMac,
-			metaKey: isMac
-		});
-
-		document.dispatchEvent(event);
+		editorRef.current.trigger('paste', 'editor.action.clipboardPasteAction', []);
 	};
 
 	const [selectedNode, setSelectedNode] = useState(null)
@@ -456,8 +420,12 @@ export default function Home() {
 													defaultLanguage="javascript"
 													defaultValue=""
 													tabSize={4}
+													ref={editorRef}
 													onChange={(value) => setCode(value)}
 													value={code}
+													minimap={{
+														position: 2,
+													}}
 													options={{
 														smoothScrolling: true,
 														wordWrap: "on",
@@ -473,6 +441,8 @@ export default function Home() {
 														tabSize: 4,
 														autoIndent: true,
 														glyphMargin: false,
+														lineNumbers: "on",
+														model: null,
 													}}
 													language="javascript"
 												//theme="vs-dark"
@@ -534,20 +504,29 @@ export default function Home() {
 														</ContextMenuShortcut>
 													</ContextMenuItem>
 													<ContextMenuSeparator />
-													<ContextMenuItem insetMonaco className="text-[13px]" onClick={cut}
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={cut} disabled
 														style={{ lineHeight: '1.0rem' }}
 													>
 														Cut
+														<ContextMenuShortcut className="mr-2">
+															{!isMac ? "Ctrl+X" : "⌘X"}
+														</ContextMenuShortcut>
 													</ContextMenuItem>
 													<ContextMenuItem insetMonaco className="text-[13px]" onClick={copy}
 														style={{ lineHeight: '1.0rem' }}
 													>
 														Copy
+														<ContextMenuShortcut className="mr-2">
+															{!isMac ? "Ctrl+C" : "⌘C"}
+														</ContextMenuShortcut>
 													</ContextMenuItem>
-													<ContextMenuItem insetMonaco className="text-[13px]" onClick={paste}
+													<ContextMenuItem insetMonaco className="text-[13px]" onClick={paste} disabled
 														style={{ lineHeight: '1.0rem' }}
 													>
 														Paste
+														<ContextMenuShortcut className="mr-2">
+															{!isMac ? "Ctrl+V" : "⌘V"}
+														</ContextMenuShortcut>
 													</ContextMenuItem>
 												</ContextMenuSub>
 											</ContextMenuContent>
