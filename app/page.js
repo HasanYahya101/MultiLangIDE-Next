@@ -420,7 +420,6 @@ export default function Home() {
 													defaultLanguage="javascript"
 													defaultValue=""
 													tabSize={4}
-													//ref={editorRef}
 													onChange={(value) => setCode(value)}
 													value={code}
 													minimap={{
@@ -441,8 +440,6 @@ export default function Home() {
 														tabSize: 4,
 														autoIndent: true,
 														glyphMargin: false,
-														lineNumbers: "on",
-														model: null,
 													}}
 													language="javascript"
 												//theme="vs-dark"
